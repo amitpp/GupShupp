@@ -65,7 +65,13 @@ function createSocketConnection() {
       console.log("# sender : "+data.sender);
       console.log("# message : "+data.text);
 
-      postToChat(data.sender, data.text);
+      if(name == data.sender){
+        postToChat(data.sender, data.text, true);
+      }
+      else {
+          postToChat(data.sender, data.text, false);
+      }
+
       clearText();
     });
 
@@ -73,7 +79,7 @@ function createSocketConnection() {
 
       showChatScreen()
       console.log("# ONLINE "+data.text);
-      postToChat(data.sender, data.text);
+      postToChat(data.sender, data.text, false);
     });
 
     socket.on('disconnect', function(user){
@@ -100,8 +106,8 @@ function join() {
   }
   else {
     name = $('#input_name').val().trim();
-
     createSocketConnection()
+    name = capitalizeFirstLetter(name);
     publish('authentication', {username:name});
   }
 
@@ -111,9 +117,17 @@ function publish(eventName, obj) {
   socket.emit(eventName, obj);
 }
 
-function postToChat(sender, message) {
-  var completeText = '<span class="name"><strong>' + sender + '</strong></span>'+":  "+message;
-  $('#messages').append($('<li>').html(completeText));
+function postToChat(sender, message, isMe) {
+  if(isMe == true) {
+
+    var completeText = message;
+    $('#messages').append($('<li class="text-right">').html(completeText).css('background-color', '#2ecc71').css('color','white').css('font-style', 'bold'));
+  }
+  else {
+    var completeText = '<span class="name"><strong>' + sender + '</strong></span>'+":  "+message;
+    $('#messages').append($('<li>').html(completeText));
+
+  }
 
 }
 
@@ -122,4 +136,8 @@ function leave() {
   socket = "";
   console.log("Logout");
   initialize();
+}
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
 }
