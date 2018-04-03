@@ -1,6 +1,7 @@
 
 var name = "";
-var socket_url = "http://localhost:3000";
+const port = process.env.PORT || 5000;;
+const socket_url = "https://gupshupp.herokuapp.com:"+port;
 
 var socket = "";
 
