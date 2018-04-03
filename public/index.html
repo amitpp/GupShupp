@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Gupshup</title>
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+  <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+  <script type="text/javascript" src="js/main.js"></script>
+</head>
+<body>
+
+<div class="body_container">
+
+  <div id="header">
+      <h1>Gupshup Chat App</h1>
+      <p class='online_count'>
+          <b>23</b> people online right now
+      </p>
+  </div>
+
+  <div id="prompt_name_container" class="box_shadow">
+      <p>Your name</p>
+      <form id="form_submit">
+          <input type="text" id="input_name" />
+          <button type="button" name="button" id="btn_login">JOIN</button>
+      </form>
+  </div>
+
+  <div id="message_container" class="box_shadow">
+
+      <ul id="messages">
+      </ul>
+
+
+      <div id="input_message_container">
+          <form id="form_send_message" method="post" action="#">
+              <input type="text" id="input_message"
+                  placeholder="Type your message here..." />
+                  <button type="button" name="button" id="btn_send">Send</button>
+
+              <div class="clear"></div>
+          </form>
+      </div>
+      <div>
+
+          <button type="button" name="button" id="btn_close">Leave Chat</button>
+      </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>

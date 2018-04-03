@@ -1,0 +1,8 @@
+{
+  "name": "Gupshupp",
+  "description": "A Socket.io Chat App",
+  "repository": "https://github.com/greenSyntax/Gupshup-Chat.git",
+  "logo": "https://cdn.rawgit.com/heroku/node-js-getting-started/master/public/node.svg",
+  "keywords": ["gupshup", "greenSyntax", "chat-app"],
+  "image": "heroku/nodejs"
+}
