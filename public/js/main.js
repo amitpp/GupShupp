@@ -44,7 +44,7 @@ function handleButtonEvents() {
 
 function createSocketConnection() {
 
-    socket = io(socket_url);
+    socket = io();
 
     socket.on('message', function(data){
 
