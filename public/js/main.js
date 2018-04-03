@@ -1,15 +1,36 @@
 
 var name = "";
-//const port = process.env.PORT || 5000;
-//const socket_url = "https://gupshupp.herokuapp.com:"+port;
-
 var socket = "";
 
 $(function(){
 
   handleButtonEvents();
+  handleEnterButton();
 
 });
+
+function handleEnterButton() {
+
+    $('input').keyup(function(event) {
+      if (event.keyCode == 13) {
+
+        if(this.id == "input_name"){
+          join();
+        }
+        else if(this.id == "input_message") {
+          send();
+        }
+      }
+
+    });
+
+    // $('#input_message').keyup(function(event) {
+    //   if (event.keyCode == 13) {
+    //       send();
+    //   }
+    //
+    // });
+}
 
 function initialize() {
   $('#prompt_name_container').show();

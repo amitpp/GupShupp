@@ -1,32 +1,30 @@
-# node-js-getting-started
+## Gupshup Chat App
 
-A barebones Node.js app using [Express 4](http://expressjs.com/).
+It's a Chat App running on sockets. I
 
-This application supports the [Getting Started with Node on Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs) article - check it out.
+# Modules
+- [x] nodeJS
+- [x] express
+- [x] socket.io
+- [x] jQuery (for front-end operations)
+- [x] Bootstrap (for UI)
+- [ ] Mongodb (for Storing Data)
 
 ## Running Locally
 
-Make sure you have [Node.js](http://nodejs.org/) and the [Heroku CLI](https://cli.heroku.com/) installed.
-
 ```sh
-$ git clone git@github.com:heroku/node-js-getting-started.git # or clone your own fork
-$ cd node-js-getting-started
+$ git clone https://github.com/greenSyntax/GupShupp.git # or clone your own fork
+$ cd GupShupp
 $ npm install
 $ npm start
 ```
 
 Your app should now be running on [localhost:5000](http://localhost:5000/).
+So, open your chrome and navigate to this path.
 
-## Deploying to Heroku
+## Deployed on Heroku
 
-```
-$ heroku create
-$ git push heroku master
-$ heroku open
-```
-or
-
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://gupshupp.herokuapp.com)
 
 ## Documentation
 
