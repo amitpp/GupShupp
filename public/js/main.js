@@ -23,13 +23,6 @@ function handleEnterButton() {
       }
 
     });
-
-    // $('#input_message').keyup(function(event) {
-    //   if (event.keyCode == 13) {
-    //       send();
-    //   }
-    //
-    // });
 }
 
 function initialize() {
@@ -119,7 +112,7 @@ function publish(eventName, obj) {
 }
 
 function postToChat(sender, message) {
-  var completeText = '<span class="name">' + sender + '</span>'+"  "+message;
+  var completeText = '<span class="name"><strong>' + sender + '</strong></span>'+":  "+message;
   $('#messages').append($('<li>').html(completeText));
 
 }
