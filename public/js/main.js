@@ -34,9 +34,12 @@ function initialize() {
   $('#footer-div-chat').hide();
 }
 
+function clearTyping() {
+  $('#is_typing').html(' ');
+}
+
 function clearText() {
   $('#input_message').val('');
-  $('#is_typing').html(' ');
 }
 
 
@@ -74,7 +77,7 @@ function handleKeyPress(){
       isTyping();
     }
     else {
-      clearText();
+      clearTyping();
     }
   });
 }
@@ -97,7 +100,6 @@ function createSocketConnection() {
           postToChat(data.sender, data.text, false);
       }
 
-      clearText();
     });
 
     socket.on('online', function(data){
@@ -133,6 +135,8 @@ function send() {
     var obj = {sender: name, text: message};
     publish('message', obj);
   }
+
+  clearText();
 }
 
 function isTyping() {
