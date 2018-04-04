@@ -64,6 +64,10 @@ function handleButtonEvents() {
 
 function handleKeyPress(){
 
+  $('input').focusout(function(){
+    clearText();
+  });
+
   $('#input_message').keyup(function(event) {
     isTyping();
   });
