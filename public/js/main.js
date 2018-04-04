@@ -65,7 +65,7 @@ function handleButtonEvents() {
 function handleKeyPress(){
 
   $('input').focusout(function(){
-    clearText();
+    //clearText();
   });
 
   $('#input_message').keyup(function(event) {
