@@ -63,6 +63,8 @@ function createSocketConnection() {
 
     socket.on('message', function(data){
 
+      console.log(">> "+$("#messages li").last().offset().top);
+
       console.log("# sender : "+data.sender);
       console.log("# message : "+data.text);
 
