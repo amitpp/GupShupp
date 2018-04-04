@@ -69,7 +69,13 @@ function handleKeyPress(){
   });
 
   $('#input_message').keyup(function(event) {
-    isTyping();
+    
+    if($('#input_message').val().length > 0) {
+      isTyping();
+    }
+    else {
+      clearText();
+    }
   });
 }
 
@@ -130,7 +136,7 @@ function send() {
 }
 
 function isTyping() {
-  var obj = {sender: name, text: name+" is typing."};
+  var obj = {sender: name, text: name+" is typing..."};
   publish('isTyping', obj);
 }
 
