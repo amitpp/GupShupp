@@ -7,6 +7,7 @@ $(function(){
   handleButtonEvents();
   handleEnterButton();
 
+  initialize();
 });
 
 function handleEnterButton() {
@@ -26,8 +27,8 @@ function handleEnterButton() {
 }
 
 function initialize() {
-  $('#prompt_name_container').show();
-  $('#message_container').hide();
+  $('#login-header-div').show();
+  $('#footer-div-chat').hide();
 }
 
 function clearText() {
@@ -35,8 +36,8 @@ function clearText() {
 }
 
 function showChatScreen() {
-  $('#prompt_name_container').hide();
-  $('#message_container').show();
+  $('#login-header-div').hide();
+  $('#footer-div-chat').show();
 }
 
 function handleButtonEvents() {
@@ -78,8 +79,14 @@ function createSocketConnection() {
     socket.on('online', function(data){
 
       showChatScreen()
-      console.log("# ONLINE "+data.text);
+      console.log("# ONLINE "+ data.text);
       postToChat(data.sender, data.text, false);
+    });
+
+    socket.on('activeUsers', function(data){
+
+      console.log("Active Users :"+data.text);
+      updateOnlineUsers(data.text);
     });
 
     socket.on('disconnect', function(user){
@@ -113,20 +120,24 @@ function join() {
 
 }
 
+function updateOnlineUsers(count) {
+  $('#active_users').html(count+' Online Users');
+}
+
 function publish(eventName, obj) {
   socket.emit(eventName, obj);
 }
 
 function postToChat(sender, message, isMe) {
   if(isMe == true) {
-
-    var completeText = message;
-    $('#messages').append($('<li class="text-right">').html(completeText).css('background-color', '#2ecc71').css('color','white').css('font-style', 'bold'));
+    //$('#messages').append($('<li class="text-right">').html(completeText).css('background-color', '#2ecc71').css('color','white').css('font-style', 'bold'));
+    $('#messages').append($('<li class="text-right">').html('<div id="name">'+sender+'</div><br><span id="meMessage" class="text-right">'+message+'</span></li>'));
   }
   else {
-    var completeText = '<span class="name"><strong>' + sender + '</strong></span>'+":  "+message;
-    $('#messages').append($('<li>').html(completeText));
+    //var completeText = '<span class="name"><strong>' + sender + '</strong></span>'+":  "+message;
+    //$('#messages').append($('<li>').html(completeText));
 
+    $('#messages').append($('<li>').html('<div id="name">'+sender+'</div><br><span id="message">'+message+'</span></li>'));
   }
 
 }

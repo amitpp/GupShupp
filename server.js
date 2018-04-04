@@ -16,12 +16,14 @@ io.sockets.on('connection', function(socket){
   // This method will be called, first
   activeUsers.push(socket);
   console.log("Connected Socket Clients : %s",activeUsers.length);
+  io.sockets.emit('activeUsers', {text: activeUsers.length, sender: 'Admin'});
 
   // Disconnect
   socket.on('disconnect', function(){
     activeUsers.splice(activeUsers.indexOf(socket), 1);
     console.log("Disconnect: Remaining Clients %s", activeUsers.length);
-
+    io.sockets.emit('activeUsers', {text: activeUsers.length, sender: 'Admin'});
+    
     io.sockets.emit('MESSAGE', {text: socket.username+" has left chat.", sender: 'Admin'});
   });
 

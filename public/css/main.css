@@ -1,6 +1,7 @@
 body {
-    padding: 0;
+    padding: 10px;
     margin: 0;
+
 }
 
 .body_container {
@@ -14,21 +15,70 @@ body {
 }
 
 .green {
-    color: #2ecc71;
+    background-color: #27ae60;
+}
+
+.blue {
+  background-color: #2980b9;
+}
+.red {
+  background-color: #e74c3c;
+}
+
+.promotional {
+  bottom: 10px;
+  position: absolute;
+  background-color: #27ae60;
+  padding-top: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+  float: right;
+}
+
+.promotional h3 {
+  text-align: center;
+  font-size: 14px;
+}
+
+.box {
+  margin: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+ul {
+
 }
 
 li{
-  background-color: #ecf0f1;
-  border-width: 0.5px;
-  border-color: #bdc3c7;
-  border-style: solid;
-  padding: 8px;
-  margin-right: 10px;
-  margin-left: 10px;
-  margin-top: 5px;
-  margin-bottom: 5px;
+  padding: 5px;
+  margin: 20px;
+  list-style: none;
 
 }
+
+li #name {
+
+}
+
+li #message {
+  padding: 10px;
+  border: 0.5px solid #bdc3c7  ;
+  background-color: #ecf0f1;
+  border-radius: 10px;
+}
+
+li #meMessage {
+  padding: 10px;
+  border: 0.5px solid #bdc3c7  ;
+  background-color: #2ecc71;
+  color: #fff;
+  border-radius: 10px;
+}
+
+
 
 #header {
     margin: 0 auto;
@@ -36,12 +86,74 @@ li{
     text-align: center;
 }
 
-#header h1,#header p.online_count {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 300;
+#login-header-div{
+  padding: 50px 0;
+  text-align: center;
+  border-width: 1px;
+  border-style: solid;
+  border-color: gray;
 }
 
-#header p.online_count {
+#footer-div-chat {
+
+  border-width: 1px;
+  border-style: solid;
+  border-color: gray;
+}
+
+#footer-div-chat h1 {
+  margin: 20px;
+  text-align: left;
+}
+
+#footer-div-chat p {
+  text-align: left;
+  margin: 20px;
+  color: gray;
+  font-size: 14px;
+}
+
+
+#login-header-div h1{
+  color: black;
+  font-size: 24px;
+}
+
+
+#login-header-div h3 {
+  color: gray;
+  font-size: 14px;
+}
+
+#header h1 {
+
+}
+#header h3 {
+  color: gray;
+  font-size: 14px;
+}
+
+#message-send-box{
+
+}
+
+#btn_send {
+  margin-left: 10px;
+}
+
+#messages {
+    margin: 0;
+    padding: 0;
+    height: 400px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.input-group {
+  padding: 10px;
+}
+
+/* #header p.online_count {
     font-size: 18px;
     display: none;
 }
@@ -169,4 +281,4 @@ li{
     cursor: pointer;
     width: 100%;
     margin: 30px 0 0 0;
-}
+} */
