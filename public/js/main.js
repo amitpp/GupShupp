@@ -1,6 +1,8 @@
 
 var name = "";
 var socket = "";
+var previousOffsetValue = "";
+var currentOffsetValue = "";
 
 $(function(){
 
@@ -63,10 +65,10 @@ function createSocketConnection() {
 
     socket.on('message', function(data){
 
-      console.log(">> "+$("#messages li").last().offset().top);
+      scrollScreen();
 
-      console.log("# sender : "+data.sender);
-      console.log("# message : "+data.text);
+      // console.log("# sender : "+data.sender);
+      // console.log("# message : "+data.text);
 
       if(name == data.sender){
         postToChat(data.sender, data.text, true);
@@ -110,6 +112,7 @@ function send() {
 }
 
 function join() {
+
   if($('#input_name').val().trim().length == 0) {
     alert('Enter Your Name');
   }
@@ -120,6 +123,26 @@ function join() {
     publish('authentication', {username:name});
   }
 
+}
+
+function scrollScreen() {
+
+  currentOffsetValue = $("#messages li").last().offset().top;
+  
+  if(currentOffsetValue < previousOffsetValue) {
+    currentOffsetValue = previousOffsetValue + 100;
+  }
+  
+  if(currentOffsetValue == previousOffsetValue){
+    currentOffsetValue = currentOffsetValue + 100;
+  }
+
+  console.log(currentOffsetValue);
+  previousOffsetValue = currentOffsetValue;
+
+  $("#messages").stop().animate({
+    scrollTop: currentOffsetValue
+  }, '300', 'swing', function() {});
 }
 
 function updateOnlineUsers(count) {
