@@ -23,7 +23,7 @@ io.sockets.on('connection', function(socket){
     activeUsers.splice(activeUsers.indexOf(socket), 1);
     console.log("Disconnect: Remaining Clients %s", activeUsers.length);
     io.sockets.emit('activeUsers', {text: activeUsers.length, sender: 'Admin'});
-    
+
     io.sockets.emit('MESSAGE', {text: socket.username+" has left chat.", sender: 'Admin'});
   });
 
@@ -33,6 +33,15 @@ io.sockets.on('connection', function(socket){
     io.sockets.emit('message', {
       text: data.text,
       sender: data.sender
+    });
+  });
+
+  // isTyping
+  socket.on('isTyping', function(data){
+
+    io.sockets.emit('isTyping', {
+      sender: data.name,
+      message: data.text
     });
   });
 

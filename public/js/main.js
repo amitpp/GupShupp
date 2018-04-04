@@ -8,6 +8,7 @@ $(function(){
 
   handleButtonEvents();
   handleEnterButton();
+  handleKeyPress();
 
   initialize();
 });
@@ -35,7 +36,9 @@ function initialize() {
 
 function clearText() {
   $('#input_message').val('');
+  $('#is_typing').html(' ');
 }
+
 
 function showChatScreen() {
   $('#login-header-div').hide();
@@ -56,6 +59,13 @@ function handleButtonEvents() {
       leave();
     }
 
+  });
+}
+
+function handleKeyPress(){
+
+  $('#input_message').keyup(function(event) {
+    isTyping();
   });
 }
 
@@ -87,6 +97,10 @@ function createSocketConnection() {
       postToChat(data.sender, data.text, false);
     });
 
+    socket.on('isTyping', function(data){
+      updateTypingText(data.message);
+    });
+
     socket.on('activeUsers', function(data){
 
       console.log("Active Users :"+data.text);
@@ -111,6 +125,11 @@ function send() {
   }
 }
 
+function isTyping() {
+  var obj = {sender: name, text: name+" is typing."};
+  publish('isTyping', obj);
+}
+
 function join() {
 
   if($('#input_name').val().trim().length == 0) {
@@ -127,8 +146,7 @@ function join() {
 
 function scrollScreen() {
 
-  currentOffsetValue = $("#messages li").last().offset().top;
-  
+  currentOffsetValue = $("#messages li").last().offset().top;  
   if(currentOffsetValue < previousOffsetValue) {
     currentOffsetValue = previousOffsetValue + 100;
   }
@@ -137,7 +155,6 @@ function scrollScreen() {
     currentOffsetValue = currentOffsetValue + 100;
   }
 
-  console.log(currentOffsetValue);
   previousOffsetValue = currentOffsetValue;
 
   $("#messages").stop().animate({
@@ -146,7 +163,11 @@ function scrollScreen() {
 }
 
 function updateOnlineUsers(count) {
-  $('#active_users').html(count+' Online Users');
+  $('#chat_label').html("Chat Screen ("+count+' Online)');
+}
+
+function updateTypingText(text) {
+  $('#is_typing').html(text);
 }
 
 function publish(eventName, obj) {
