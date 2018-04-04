@@ -48,9 +48,6 @@ body {
   padding-right: 50px;
 }
 
-ul {
-    
-}
 
 li{
   padding: 5px;
@@ -76,14 +73,6 @@ li #meMessage {
   background-color: #2ecc71;
   color: #fff;
   border-radius: 10px;
-}
-
-
-
-#header {
-    margin: 0 auto;
-    padding: 50px 0;
-    text-align: center;
 }
 
 #login-header-div{
@@ -125,9 +114,12 @@ li #meMessage {
   font-size: 14px;
 }
 
-#header h1 {
+#login-header-div h4 {
+    color: gray;
+    font-size: 12px;
+  }
 
-}
+
 #header h3 {
   color: gray;
   font-size: 14px;
