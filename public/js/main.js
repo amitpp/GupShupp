@@ -67,10 +67,6 @@ function handleButtonEvents() {
 
 function handleKeyPress(){
 
-  $('input').focusout(function(){
-    //clearText();
-  });
-
   $('#input_message').keyup(function(event) {
     
     if($('#input_message').val().length > 0) {
@@ -89,9 +85,6 @@ function createSocketConnection() {
     socket.on('message', function(data){
 
       scrollScreen();
-
-      // console.log("# sender : "+data.sender);
-      // console.log("# message : "+data.text);
 
       if(name == data.sender){
         postToChat(data.sender, data.text, true);
@@ -137,6 +130,7 @@ function send() {
   }
 
   clearText();
+  clearTyping();
 }
 
 function isTyping() {
@@ -177,7 +171,7 @@ function scrollScreen() {
 }
 
 function updateOnlineUsers(count) {
-  $('#chat_label').html("Chat Screen ("+count+' Online)');
+  $('#chat_label').html("#common ("+count+' Online)');
 }
 
 function updateTypingText(text) {
