@@ -17,7 +17,7 @@ io.sockets.on('connection', function(socket){
   // This method will be called, first
   activeUsers.push(socket);
   console.log("Connected Socket Clients : %s",activeUsers.length);
-  io.sockets.emit('activeUsers', {text: activeUsers.length, sender: 'Admin'});
+  io.sockets.emit('activeUsers', {text: activeUsers.length, sender: 'Admin', users:userNames});
 
   // Disconnect
   socket.on('disconnect', function(){

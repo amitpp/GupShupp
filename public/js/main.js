@@ -47,7 +47,7 @@ function clearText() {
 function showChatScreen() {
   $('#login-header-div').hide();
   $('#footer-div-chat').show();
-  //$('#online_users').show();
+  $('#online_users').show();
 }
 
 function handleButtonEvents() {
@@ -71,7 +71,7 @@ function handleKeyPress(){
 
   $('#input_message').keyup(function(event) {
     
-    if($('#input_message').val().length > 0) {
+    if($('#input_message').val().length > 1) {
       isTyping();
     }
     else {
@@ -87,6 +87,7 @@ function createSocketConnection() {
     socket.on('message', function(data){
 
       scrollScreen();
+      clearTyping();
 
       if(name == data.sender){
         postToChat(data.sender, data.text, true);
@@ -102,8 +103,17 @@ function createSocketConnection() {
       showChatScreen()
 
       console.log("Online :"+data.text);
-      updateUserList(data);
-      console.log("List of Users : "+data.users);
+      
+      $('#online_users').html(' ');
+      $('#online_users').html('<a href="#" class="list-group-item list-group-item-action active">Online</a>');
+
+      for(var i = 0; i < data.users.length; i++){
+        // Add User
+        console.log("Username : "+data.users[i]);
+    
+        $('#online_users').append('<label class="list-group-item list-group-item-action">'+data.users[i]+'</label>');
+      }
+
       
       postToChat(data.sender, data.text, false);
     });
@@ -116,7 +126,18 @@ function createSocketConnection() {
 
       console.log("Active Users :"+data.text);
       updateOnlineUsers(data.text);
-      updateUserList(data);
+      
+      $('#online_users').html(' ');
+      $('#online_users').html('<a href="#" class="list-group-item list-group-item-action active">Online</a>');
+      
+    
+      for(var i = 0; i < data.users.length; i++){
+        // Add User
+        console.log("Username : "+data.users[i]);
+    
+        $('#online_users').append('<label class="list-group-item list-group-item-action">'+data.users[i]+'</label>');
+      }
+
     });
 
     socket.on('disconnect', function(user){
@@ -183,12 +204,7 @@ function updateOnlineUsers(count) {
 
 function updateUserList(usersList) {
 
-  // for(var i = 0; i < usersList.users.length; i++){
-  //     // Add User
-  //     console.log("Username : "+users[i]);
-    
-  //     $('#online_users').append('<label class="list-group-item list-group-item-action">'+users[i]+'</label>');
-  // }
+  
 }
 
 function updateTypingText(text) {
