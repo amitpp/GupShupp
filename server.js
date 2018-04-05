@@ -9,6 +9,7 @@ const port = process.env.PORT || 5000;
 app.use(express.static(path.join(__dirname,'public')));
 
 activeUsers = [];
+userNames = [];
 
 // Esatblish Connection with Clients
 io.sockets.on('connection', function(socket){
@@ -20,11 +21,14 @@ io.sockets.on('connection', function(socket){
 
   // Disconnect
   socket.on('disconnect', function(){
+    
     activeUsers.splice(activeUsers.indexOf(socket), 1);
-    console.log("Disconnect: Remaining Clients %s", activeUsers.length);
-    io.sockets.emit('activeUsers', {text: activeUsers.length, sender: 'Admin'});
+    userNames.splice(userNames.indexOf(socket.username), 1);
 
-    io.sockets.emit('MESSAGE', {text: socket.username+" has left chat.", sender: 'Admin'});
+    console.log("Disconnect: Remaining Clients %s", activeUsers.length);
+    
+    io.sockets.emit('activeUsers', {text: activeUsers.length, sender: 'Admin', users:userNames});
+    io.sockets.emit('message', {text: socket.username+" is offline.", sender: 'Bot'});
   });
 
   // Subscriber : Getting Data
@@ -47,13 +51,15 @@ io.sockets.on('connection', function(socket){
 
   socket.on('authentication', function(user){
 
-    console.log("Got request of user : "+user.username);
-    //io.sockets.emit('message', {text: user.username+" is online.", sender: 'Bot'});
-    io.sockets.emit('online', {text: user.username+" is online.", sender: 'Bot'});
-  });
+    socket.username = user.username;    
+    console.log("Index : "+userNames.indexOf(user.username));
 
-  socket.on('DISCONNECT_USER', function(user){
+    if(userNames.indexOf(user.username) < 0){
+      console.log("Added to Userlist :"+user.username);
+      userNames.push(user.username);
+    }
 
+    io.sockets.emit('online', {text: user.username+" is online.", sender: 'Bot', users: userNames});
   });
 
 });
@@ -61,3 +67,11 @@ io.sockets.on('connection', function(socket){
 http.listen(port, function(){
   console.log("Server running at "+port);
 });
+
+// Utils
+function inList(object, list){
+  if(list.indexOf(object) == -1){
+    return false;
+  }
+  return true;
+}

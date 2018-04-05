@@ -32,6 +32,7 @@ function handleEnterButton() {
 function initialize() {
   $('#login-header-div').show();
   $('#footer-div-chat').hide();
+  $('#online_users').hide();
 }
 
 function clearTyping() {
@@ -46,6 +47,7 @@ function clearText() {
 function showChatScreen() {
   $('#login-header-div').hide();
   $('#footer-div-chat').show();
+  //$('#online_users').show();
 }
 
 function handleButtonEvents() {
@@ -98,7 +100,11 @@ function createSocketConnection() {
     socket.on('online', function(data){
 
       showChatScreen()
-      console.log("# ONLINE "+ data.text);
+
+      console.log("Online :"+data.text);
+      updateUserList(data);
+      console.log("List of Users : "+data.users);
+      
       postToChat(data.sender, data.text, false);
     });
 
@@ -110,6 +116,7 @@ function createSocketConnection() {
 
       console.log("Active Users :"+data.text);
       updateOnlineUsers(data.text);
+      updateUserList(data);
     });
 
     socket.on('disconnect', function(user){
@@ -172,6 +179,16 @@ function scrollScreen() {
 
 function updateOnlineUsers(count) {
   $('#chat_label').html("#common ("+count+' Online)');
+}
+
+function updateUserList(usersList) {
+
+  for(var i = 0; i < usersList.users.length; i++){
+      // Add User
+      console.log("Username : "+users[i]);
+    
+      $('#online_users').append('<label class="list-group-item list-group-item-action">'+users[i]+'</label>');
+  }
 }
 
 function updateTypingText(text) {
