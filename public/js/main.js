@@ -183,12 +183,12 @@ function updateOnlineUsers(count) {
 
 function updateUserList(usersList) {
 
-  for(var i = 0; i < usersList.users.length; i++){
-      // Add User
-      console.log("Username : "+users[i]);
+  // for(var i = 0; i < usersList.users.length; i++){
+  //     // Add User
+  //     console.log("Username : "+users[i]);
     
-      $('#online_users').append('<label class="list-group-item list-group-item-action">'+users[i]+'</label>');
-  }
+  //     $('#online_users').append('<label class="list-group-item list-group-item-action">'+users[i]+'</label>');
+  // }
 }
 
 function updateTypingText(text) {
